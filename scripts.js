@@ -39,6 +39,30 @@ new GLTFLoader().load('car.glb', function (gltf) {
         model.getObjectByName('wheel_br')
     );
 
+    document.addEventListener('mousemove', handleMouseMove, false);
+
+    let mousePos = 0;
+
+    function handleMouseMove(event) {
+        mousePos = -1 + (event.clientX / window.innerWidth) * 2;
+        updateCar();
+    }
+
+    function updateCar(){
+        let targetX = normalize(mousePos, -1, 1, -3, 3);
+        model.position.x += (targetX-model.position.x)*0.1;
+        model.rotation.y = (model.position.x-targetX)*-0.3;
+    }
+    
+    function normalize(v,vmin,vmax,tmin, tmax){
+        let nv = Math.max(Math.min(v,vmax), vmin);
+        let dv = vmax-vmin;
+        let pc = (nv-vmin)/dv;
+        let dt = tmax-tmin;
+        let tv = tmin + (pc*dt);
+        return tv;
+    }
+
     scene.add(model);
 });
 
