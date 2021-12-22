@@ -49,7 +49,7 @@ new GLTFLoader().load('car.glb', function (gltf) {
     let mousePos = 0;
 
     function handleMouseMove(event) {
-        mousePos = -1 + (event.clientX / size.width) * 2;
+        mousePos = -1 + (event.clientX / window.innerWidth) * 2;
         updateCar();
     }
 
@@ -96,7 +96,7 @@ scene.add(scenary);
 let Clouds = function () {
     this.mesh = new THREE.Object3D();
     let geom = new THREE.BoxGeometry(5, 5, 5);
-    let mat = new THREE.MeshPhongMaterial({ color: "white" });
+    let mat = new THREE.MeshPhongMaterial({ color: 0xDEC764 });
     let nBlocs = 3 + Math.floor(Math.random() * 3);
 
     for (let i = 0; i < nBlocs; i++) {
